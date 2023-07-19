@@ -12,12 +12,20 @@ class Tile(pygame.sprite.Sprite):
         self.width = self.height = cell_size
         
         self.image = pygame.Surface([self.width, self.height])
-        self.image.fill(colours.BLACK)
+        self.image.fill(colours.RED)
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.x = x + 1
+        self.rect.y = y + 1
 
+        self.border = pygame.Surface([self.width + 10, self.height + 10])
+        self.border.fill(colours.BLACK)
+        self.border_rect = self.border.get_rect()
+        self.border_rect.x = x 
+        self.border_rect.y = y
+
+        self.value = "0"
         self.hover = False
+        self.colour = colours.GREEN
 
         self.interface.tiles.append(self)
 
@@ -25,13 +33,17 @@ class Tile(pygame.sprite.Sprite):
         return f" ( x: {str(self.rect.x)}  y: {str(self.rect.y)}) "
     
     def draw(self):
-        if self.hover:
-            pygame.draw.rect(self.screen, colours.GREEN, self.rect)
-        else:
-            pygame.draw.rect(self.screen, colours.WHITE, self.rect)
+        match self.value:
+            case "Snake":
+                self.colour = colours.GREEN
+            case "Dead":
+                self.colour = colours.RED
+            case "Apple":
+                self.colour = colours.CRIMSON
+            case _:
+                self.colour = colours.WHITE
+        
+        pygame.draw.rect(self.screen, colours.BLACK, self.border_rect)
+        pygame.draw.rect(self.screen, self.colour, self.rect)
 
-    def handle_event(self, event):
-        if event.type == pygame.MOUSEMOTION: #update collide state
-            if self.rect.collidepoint(event.pos):
-                self.colour = colours.GOLD
-                
+  
