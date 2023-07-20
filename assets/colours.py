@@ -4,6 +4,7 @@ from pygame import Color as c
 WHITE = c('white')
 BLACK = c('black')
 GREEN = c('green')
+GREEN_2 = c('green3')
 RED   = c('red')
 CRIMSON = c('crimson')
 ORANGE = c('orange')

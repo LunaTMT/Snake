@@ -3,7 +3,7 @@ import assets.colours as colours
 import random
 from collections import deque
 import pygame
-import Gamestate
+from gamestate import GameState
 
 class Snake:
     
@@ -14,9 +14,19 @@ class Snake:
         self.apple          = interface.apple
         self.k              = interface.k
 
+        self.draw_title     = interface.draw_title
+        self.title_font     = interface.title_font
+        self.end_game_text  = interface.end_game_text
 
         self.positions = deque([])
         self.length = 3
+
+        head_image = pygame.image.load("assets/images/snake_head.png")
+        self.head_image = pygame.transform.scale(head_image, (self.screen.cell_size, self.screen.cell_size))
+
+        head_image = pygame.image.load("assets/images/snake_head.png")
+        self.head_image = pygame.transform.scale(head_image, (self.screen.cell_size, self.screen.cell_size))
+
         self.counter = 0
         self.value = "Snake"
 
@@ -41,8 +51,9 @@ class Snake:
                              (0,  1)  : "RIGHT"}
         
 
+        self.init_images()
         self.init_snake_positions()
-   
+        
 
 
     def init_snake_positions(self):
@@ -65,9 +76,27 @@ class Snake:
                 self.positions.appendleft((r, c-1))
                 self.positions.appendleft((r, c-2))
 
-        self.set_body("Snake")
+        self.set_body(self.body_image)
             
+    def init_images(self):
         
+        def set_to_cell_size(image):
+            return pygame.transform.scale(image, (self.screen.cell_size, self.screen.cell_size))
+
+        self.head_image = pygame.image.load("assets/images/snake_head.png")
+        self.head_image = set_to_cell_size(self.head_image)
+
+        self.dead_head_image = pygame.image.load("assets/images/dead_snake_head.png")
+        self.dead_head_image = set_to_cell_size(self.dead_head_image)
+
+        self.body_image = pygame.image.load("assets/images/snake_body.png")
+        self.body_image = set_to_cell_size(self.body_image)
+
+        self.tail_image = pygame.image.load("assets/images/snake_tail.png")
+        self.tail_image = set_to_cell_size(self.tail_image)
+
+
+    
     def handle_event(self, event):
 
             if event.type == KEYDOWN:
@@ -88,13 +117,22 @@ class Snake:
         #set the snek on the board
         for (r, c) in self.positions:
             self.board[r, c].value = value
-    
+        
+        r, c = self.positions[1] 
+        self.board[r, c].value = self.tail_image
+
 
     @property
     def head(self):
         self._head = self.positions[-1]
         return self._head
     
+    @head.setter
+    def head(self, value):
+        r, c = self.head
+        self.board[r, c].value = value
+
+
     @property
     def tail(self):
         self._tail = self.positions[0]
@@ -105,6 +143,7 @@ class Snake:
         r, c = self.tail
         self.board[r, c].value = value
         self.positions.popleft()
+
 
 
     def move(self):
@@ -131,18 +170,20 @@ class Snake:
             
             if self.apple_collision():
                 self.generate_new_tail()
-                #self.board[self.apple.position].value = "O"
                 self.apple.generate()
                 self.length += 1
             
             elif self.check_collision(new_position):
-                self.set_body("Dead")
-                Gamestate.play_game = False
-                Gamestate.end_game = True  
+                self.head = self.dead_head_image
+                GameState.play_game = False
+                GameState.end_game = True  
+                self.interface.start_timer()
+                
             else:
                 #simply update head and remove tail to give appearance of movement
                 self.positions.append(new_position)
-                self.set_body(self.value)
+                self.set_body(self.body_image)
+                self.head = self.head_image
                 self.tail = "0"
                 self.last_move_time = self.current_time
                 self.direction = self.new_direction 
@@ -152,23 +193,27 @@ class Snake:
         new_tail_position = tuple(map(lambda i, j: i + j, self.positions[-1], diff))  
         self.positions.append(new_tail_position)        
 
+
+
     def check_collision(self, position):
         r, c = position
         if (position in self.positions or self.board.check_out_of_bounds(position)):
-            print(self.positions)
             return True
             
         return False
     
     def apple_collision(self):
         return True if self.positions[-1] == self.apple.position else False
-    
+
+
+
+
     def check_winstate(self):
         
         if self.length == self.k**2:
-            print(True)
             self.interface.end_game_text = "You Win!"
             self.interface.title_colour = colours.GREEN
-            Gamestate.play_game = False
-            Gamestate.end_game = True  
+            
+            GameState.play_game = False
+            GameState.end_game = True  
             

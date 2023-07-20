@@ -1,5 +1,6 @@
 from .tile import Tile
 import random
+import os
 class Board:
     
     def __init__(self, interface) -> None:
@@ -8,6 +9,8 @@ class Board:
         self.cell_size  = interface.screen.cell_size 
         self.k          = interface.k
 
+
+        #self.clear = lambda: os.system('clear')
         self.board = [[0 for _ in range(self.k)] for _ in range(self.k)]
         self.generate_tiles()
 
@@ -19,8 +22,7 @@ class Board:
         row, col = index
         self.board[row][col] = value
         
-        
-
+    
     def check_out_of_bounds(self, position):
         r, c = position
         if not (0 <= r < self.k) or not (0 <= c < self.k):
@@ -34,6 +36,17 @@ class Board:
                 y =  r * self.cell_size
                 tile = Tile(self.interface, x, y, self.cell_size)      
                 self[r, c] = tile 
+
+    def clear(self):
+        for r in self.board:
+            for tile in r:
+                tile.value = "0"
+
+    def print_board(self):
+        for r in self.board:
+            for tile in r:
+                print(tile, end="")
+            print()
 
     def draw(self):
         for r in self.board:
@@ -55,9 +68,3 @@ class Board:
 
             return (r, c)
 
-
-    def print_board(self):
-        for r in self:
-            for tile in r:
-                print(tile, end="")
-            print()

@@ -10,6 +10,7 @@ class Screen:
         self.colour = colours.WHITE
         pygame.display.set_caption("Snake")
 
+    
 
     def init_dimensions(self):
         if self.k <= 10:

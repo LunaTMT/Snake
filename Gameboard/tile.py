@@ -30,20 +30,25 @@ class Tile(pygame.sprite.Sprite):
         self.interface.tiles.append(self)
 
     def __str__(self):
-        return f" ( x: {str(self.rect.x)}  y: {str(self.rect.y)}) "
+        return f" {self.value} "
     
     def draw(self):
-        match self.value:
-            case "Snake":
-                self.colour = colours.GREEN
-            case "Dead":
-                self.colour = colours.RED
-            case "Apple":
-                self.colour = colours.CRIMSON
-            case _:
-                self.colour = colours.WHITE
         
-        pygame.draw.rect(self.screen, colours.BLACK, self.border_rect)
-        pygame.draw.rect(self.screen, self.colour, self.rect)
+        if type(self.value) == pygame.surface.Surface:
+            self.screen.blit(self.value, (self.rect.x, self.rect.y))
+        else:
+            match self.value:
+                case "Snake":
+                    self.colour = colours.GREEN
+                case "Head":
+                    self.colour = colours.GREEN_2        
+                case "Dead":
+                    self.colour = colours.CRIMSON
+                case "Apple":
+                    self.colour = colours.CRIMSON
+                case _:
+                    self.colour = colours.WHITE
 
-  
+            #pygame.draw.rect(self.screen, colours.BLACK, self.border_rect)
+            pygame.draw.rect(self.screen, self.colour, self.rect)
+
