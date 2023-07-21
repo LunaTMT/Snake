@@ -6,10 +6,12 @@ class Apple:
             self.screen     = interface.screen
             self.k          = interface.k
             
-            self.value = "Apple"
+            self.position = None
+            self.value = "A"
 
             self.generate()
 
     def generate(self):
         self.position = r, c = self.board.generate_random_position()
         self.board[r, c].value = self.value
+    
