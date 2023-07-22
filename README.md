@@ -18,7 +18,7 @@ Before beginning please make sure you have [python](https://www.python.org/downl
 
 </div>
 
-* Export the folder to a given location
+* Export the contents of the zipped folder to a given location
 
 <div align="center">
 
