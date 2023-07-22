@@ -16,10 +16,8 @@ from other.screen import Screen
 from other.sound import Sound
 from other.image import Image
 
-# Create the game window 
-class Game:
 
-    
+class Game:
 
     def __init__(self, k):
         self.is_running = False
