@@ -2,10 +2,8 @@
 
 ### Demonstration
 
-https://github.com/LunaTMT/Snake/assets/44672093/dabacefa-eca3-4259-bfad-61212ebf5951
 
-
-https://github.com/LunaTMT/Snake/assets/44672093/208c9800-7284-4564-a88c-c0a5ab7c2425
+https://github.com/LunaTMT/Snake/assets/44672093/8d32fc21-2bd6-42f4-936b-2780512debe8
 
 
 ### How to run
