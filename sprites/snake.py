@@ -1,8 +1,11 @@
-from pygame.locals import *
-import assets.colours as colours
-import random
-from collections import deque
 import pygame
+import random
+
+from pygame.locals import *
+from collections import deque
+
+import assets.colours as colours
+
 from game.gamestate import GameState
 from gameboard.tile import Tile
 

@@ -1,4 +1,5 @@
 class GameState:
+
     dead = False
     play_game = True
     end_game = False

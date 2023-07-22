@@ -1,8 +1,5 @@
 import pygame
 
-import assets.colours as colours
-
-
 class Tile(pygame.sprite.Sprite):
     
     GRASS = None
@@ -14,7 +11,6 @@ class Tile(pygame.sprite.Sprite):
         self.width = self.height = cell_size
         
         self.image = pygame.Surface([self.width, self.height])
-        self.image.fill(colours.RED)
         self.rect = self.image.get_rect()
         self.rect.x = x 
         self.rect.y = y

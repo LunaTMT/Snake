@@ -1,6 +1,7 @@
 from .tile import Tile
 import random
 import os
+
 class Board:
     
     def __init__(self, interface) -> None:

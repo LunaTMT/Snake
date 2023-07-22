@@ -1,15 +1,18 @@
 import pygame
 
-
-import assets.colours as colours
 from pygame.locals import *
-from other.screen import Screen
-from gameboard.board import Board
+import assets.colours as colours
+
 from sprites.snake import Snake
 from sprites.apple import Apple
+
+from gameboard.board import Board
 from gameboard.scoreboard import Scoreboard
+
 from game.gamestate import GameState
+
 from other.rectangle import Rectangle
+from other.screen import Screen
 from other.sound import Sound
 from other.image import Image
 
