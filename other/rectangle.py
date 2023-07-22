@@ -1,8 +1,6 @@
-import assets.colours as colours
-
 
 class Rectangle():
-
+    
     @classmethod
     def get_size(cls, rect) -> tuple[int]:
         """
@@ -12,20 +10,24 @@ class Rectangle():
         return  rect.width, rect.height
     
     @classmethod
-    def draw_text_in_center(cls, screen, font, text, rect):
-            # Calculate the center coordinates of the rectangle
-            center_x = rect.x + rect.width // 2
-            center_y = rect.y + rect.height // 2 + 10
+    def draw_text_in_center(cls, screen, font, text, rect, colour):
+        """
+        This function takes a rectangle and draws the provided text in the rectangles center
+        """
 
-            # Render the number using the font
-            text = font.render(text, True, colours.BLACK)
+        # Calculate the center coordinates of the rectangle
+        center_x = rect.x + rect.width // 2
+        center_y = rect.y + rect.height // 2 + 10
 
-            # Get the size of the rendered text
-            text_width, text_height = text.get_size()
+        # Render the number using the font
+        text = font.render(text, True, colour)
 
-            # Calculate the position to center the number in the rectangle
-            number_x = center_x - text_width // 2
-            number_y = center_y - text_height // 2
+        # Get the size of the rendered text
+        text_width, text_height = text.get_size()
 
-            # Draw the number at the center position
-            screen.blit(text, (number_x, number_y))
+        # Calculate the position to center the number in the rectangle
+        number_x = center_x - text_width // 2
+        number_y = center_y - text_height // 2
+
+        # Draw the number at the center position
+        screen.blit(text, (number_x, number_y))

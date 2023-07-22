@@ -1,4 +1,6 @@
 import pygame
+
+
 import assets.colours as colours
 from pygame.locals import *
 from other.screen import Screen
@@ -8,26 +10,36 @@ from sprites.apple import Apple
 from gameboard.scoreboard import Scoreboard
 from game.gamestate import GameState
 from other.rectangle import Rectangle
-
+from other.sound import Sound
+from other.image import Image
 
 # Create the game window 
 class Game:
+
+    
+
     def __init__(self, k):
         self.is_running = False
-        self.k = k
+        self.start_time = None
         self.game_speed = None
-        self.tiles = []        
+        
+        self.k = k
+        self.tiles = []
+
         self.screen = Screen(self)
+        self.sound = Sound()
+        self.image = Image(self)
+        
 
     def init(self):
         pygame.init()
-         
+
         self.running = True
         self.clock = pygame.time.Clock()
         
         self.title_font = pygame.font.Font("assets/fonts/title.ttf", int(self.screen.width * 0.1))
         self.scoreboard_font = pygame.font.Font("assets/fonts/scoreboard.ttf", 2 * int(self.screen.cell_size))
-        self.title_colour = colours.RED
+        self.end_game_colour = colours.RED
         self.end_game_text = "You Lose"
 
         #init objects
@@ -36,7 +48,7 @@ class Game:
         self.snake      = Snake(self)
         self.scoreboard = Scoreboard(self)
 
-        self.start_time = None
+        
 
 
     def run(self):
@@ -64,6 +76,7 @@ class Game:
             self.running = False
     
     def check_any_key(self, event):
+        #Upon final gamestate if the user presses any key the game is reinitialised
         if event.type == KEYDOWN:
             GameState.reset_states()
             self.init()
@@ -71,19 +84,16 @@ class Game:
 
     def update(self):
         if GameState.play_game:
-            self.snake.move() #This is the move method
+            self.snake.move() 
 
     def draw(self):
-
-    
         self.board.draw()
         self.scoreboard.draw()
 
         if GameState.end_game:
             if self.is_timer_finished():
-                self.board.clear()
-                self.draw_title(self.title_font, self.end_game_text, x=1 ,y=0.5)
-                self.draw_title(self.title_font, "Please press any \n  key to continue")
+                self.draw_title(self.title_font, self.end_game_text, self.end_game_colour  , x=1 ,y=0.5)
+                self.draw_title(self.title_font, "      Press any \n key to continue", colours.WHITE)
         
         pygame.display.flip()
 
@@ -91,11 +101,14 @@ class Game:
         print("Quitting")
         pygame.quit()
 
-    def draw_title(self, font, text, x=1, y=1) -> None:
+
+
+
+    def draw_title(self, font, text, colour, x=1, y=1) -> None:
         """
         A simple method that will print on the screen a title of given parameters
         """
-        title = font.render(text, True, self.title_colour)
+        title = font.render(text, True, colour)
         width, height = Rectangle.get_size(title)
         self.screen.surface.blit(title, self.get_centered_coord(width, height, x, y))
 
@@ -108,13 +121,27 @@ class Game:
         center_y = (self.screen.height - height) // 2
         return center_x * x_tranpose, center_y * y_transpose
     
-    # Function to start the timer
+    
     def start_timer(self):
+        """
+        Function to start the timer
+        """
         self.start_time = pygame.time.get_ticks()
 
-    # Function to check if the timer has elapsed
+    
     def is_timer_finished(self):
+        """
+        This funciton checks if the timer has elapsed
+
+        Before the function another time must be started elsewhere for the comparison in elapsed time,
+        for example in:
         
+        snake.py
+        def check_bad_collisions(self, ...)
+            ---
+            ---
+            self.interface.start_timer()
+        """
         if self.start_time is None:
             return False
 

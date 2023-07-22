@@ -5,6 +5,8 @@ import assets.colours as colours
 
 class Tile(pygame.sprite.Sprite):
     
+    GRASS = None
+
     def __init__(self, interface, x, y, cell_size) -> None:
         super().__init__()
         self.interface = interface
@@ -14,45 +16,17 @@ class Tile(pygame.sprite.Sprite):
         self.image = pygame.Surface([self.width, self.height])
         self.image.fill(colours.RED)
         self.rect = self.image.get_rect()
-        self.rect.x = x + 1
-        self.rect.y = y + 1
+        self.rect.x = x 
+        self.rect.y = y
 
-        self.border = pygame.Surface([self.width + 10, self.height + 10])
-        self.border.fill(colours.BLACK)
-        self.border_rect = self.border.get_rect()
-        self.border_rect.x = x 
-        self.border_rect.y = y
-
-        self.value = "_"
-        self.hover = False
-        self.colour = colours.GREEN
+        #Create the grass image once and store as class variable, unneccsary to do it for all K^2 tiles
+        self.value =  interface.image.create("assets/images/grass.jpg") if not Tile.GRASS else Tile.GRASS
+        Tile.GRASS = self.value
 
         self.interface.tiles.append(self)
 
-    def __str__(self):
-        return f" {self.value} "
-    
     def draw(self):
-        
-        if type(self.value) == pygame.surface.Surface:
-            self.screen.blit(self.value, (self.rect.x, self.rect.y))
-        else:
-            match self.value:
-                case "B":
-                    self.colour = colours.GREEN
-                case "H":
-                    self.colour = colours.GREEN_2        
-                case "Dead":
-                    self.colour = colours.CRIMSON
-                case "A":
-                    self.colour = colours.CRIMSON
-                case "T":
-                    self.colour = colours.CRIMSON
-                case "_":
-                    self.colour = colours.WHITE
-
-            
-
-            #pygame.draw.rect(self.screen, colours.BLACK, self.border_rect)
-            pygame.draw.rect(self.screen, self.colour, self.rect)
-
+        """
+        Simply blits on the screen the current image value of the tile for its associated rectangle
+        """
+        self.screen.blit(self.value, (self.rect.x, self.rect.y))

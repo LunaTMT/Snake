@@ -16,6 +16,10 @@ class Screen:
     
 
     def init_dimensions(self):
+        """
+        Based upon the size of the board which is passed as an argument in main.py (k)
+        The screen size and the game speed is altered accordingly for a relatively comfortable playing experience
+        """
         if self.k <= 5:
             self.cell_size = 50
             self.interface.game_speed = 500
@@ -35,7 +39,6 @@ class Screen:
         elif self.k <= 50:
             self.cell_size = 20
             self.interface.game_speed = 50
-
 
         return self.cell_size * (self.k)
         

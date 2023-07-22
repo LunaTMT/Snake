@@ -1,4 +1,5 @@
 from other.rectangle import Rectangle
+import assets.colours as colours
 
 class Scoreboard:
     def __init__(self, interface) -> None:
@@ -27,4 +28,4 @@ class Scoreboard:
         for i in range(n): 
             tile = self.board[0, self.k - 1 - i] #First row 
             number_txt = score[::-1][i]
-            Rectangle.draw_text_in_center(self.screen.surface, self.scoreboard_font, number_txt, tile.rect)
+            Rectangle.draw_text_in_center(self.screen.surface, self.scoreboard_font, number_txt, tile.rect, colours.WHITE)

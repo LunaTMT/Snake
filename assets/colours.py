@@ -16,4 +16,5 @@ BLUE_VIOLET = c('blueviolet')
 DEEP_SKY_BLUE = c('deepskyblue')
 FIREBRICK = c('firebrick')
 FIREBRICK_2 = c('firebrick2')
+INDIAN_RED = c('indianred')
 
