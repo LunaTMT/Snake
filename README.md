@@ -40,11 +40,10 @@ Before beginning please make sure you have [python](https://www.python.org/downl
 
 </div>
 
-
-
 * Execute the file by clicking on the _"Run"_ tab at the top and then clicking _"Run Module."_ Or you can simply press _"F5"_
 
-
+<div align="center">
 
 <figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
+</div>
