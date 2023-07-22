@@ -3,7 +3,10 @@
 ### Demonstration
 
 
-https://github.com/LunaTMT/Snake/assets/44672093/8d32fc21-2bd6-42f4-936b-2780512debe8
+
+https://github.com/LunaTMT/Snake/assets/44672093/0da04875-07a1-4c1d-ab0d-f39501541e41
+
+
 
 
 ### How to run
