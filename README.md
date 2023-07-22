@@ -1,9 +1,5 @@
 # Snake
 
-Description
-
-This project is a basic Snake game created with Pygame
-
 ### How to run
 
 Before beginning please make sure you have [python](https://www.python.org/downloads/) installed on your system.
