@@ -1,5 +1,9 @@
 # Snake
 
+### Demonstration
+
+{% file src=".gitbook/assets/demo.mp4" %}
+
 ### How to run
 
 Before beginning please make sure you have [python](https://www.python.org/downloads/) installed on your system.
