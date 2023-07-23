@@ -3,6 +3,9 @@ cover: ![kaa](https://github.com/LunaTMT/Snake/assets/44672093/3c182cdc-46b4-40b
 coverY: 150
 ---
 
+![kaa](https://github.com/LunaTMT/Snake/assets/44672093/bb699864-171b-45d0-8c04-d06216b392a4)
+
+
 # Snake
 
 ## Demonstration
