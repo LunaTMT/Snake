@@ -36,7 +36,7 @@ class Screen:
             self.cell_size = 25
             self.interface.game_speed = 100
 
-        elif self.k <= 50:
+        else:
             self.cell_size = 20
             self.interface.game_speed = 50
 
