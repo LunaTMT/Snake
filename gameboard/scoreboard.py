@@ -11,7 +11,7 @@ class Scoreboard:
 
         self.scoreboard_font = interface.scoreboard_font
 
-    def draw(self):
+    def draw(self) -> None:
         """
         In this funciton we draw the score, I.e. the length of the snake in the top right tiles of the board
         The numbers are drawn in reverse order.
