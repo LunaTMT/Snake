@@ -9,7 +9,7 @@ coverY: 176
 
 https://github.com/LunaTMT/Snake/assets/44672093/0da04875-07a1-4c1d-ab0d-f39501541e41
 
-## Setup
+## Setup (KxK)
 
 The code is created such that the user can select any _reasonable_ board size and have a comfortable playing experience. For the best experience, I recommend setting the board size to 20. Anything < 50 is what I would deem reasonable.
 
