@@ -56,22 +56,15 @@ class Game:
 
     def handle_events(self):
         for event in pygame.event.get():
-            self.check_if_quit(event)           
+            if event.type == QUIT:
+                self.running = False      
             if GameState.play_game:
                 self.snake.handle_event(event)            
             if GameState.end_game:
-                self.check_any_key(event)
-        
-    def check_if_quit(self, event):
-        if event.type == QUIT:
-            self.running = False
-    
-    def check_any_key(self, event):
-        #Upon final gamestate if the user presses any key the game is reinitialised
-        if event.type == KEYDOWN:
-            GameState.reset_states()
-            self.init()
-            
+                if event.type == KEYDOWN:
+                    GameState.reset_states()
+                    self.init()
+                
     def update(self):
         if GameState.play_game:
             self.snake.move() 
