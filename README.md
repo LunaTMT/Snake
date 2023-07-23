@@ -1,5 +1,5 @@
 ---
-cover: .gitbook/assets/kaa (1).jpeg
+cover: ![kaa](https://github.com/LunaTMT/Snake/assets/44672093/3c182cdc-46b4-40b6-89e3-d81c1e19510d)
 coverY: 150
 ---
 
