@@ -11,25 +11,24 @@ class Board:
         self.k          = interface.k
         self.image      = interface.image
 
-        #self.clear = lambda: os.system('clear')
         self.board = [['_' for _ in range(self.k)] for _ in range(self.k)]
         self.generate_tiles()
 
         self.clear = lambda: os.system('clear')
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> Tile:
         row, col = index
         try:
             return self.board[row][col]
         except:
             return IndexError
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index, value) -> None:
         row, col = index
         self.board[row][col] = value
         
     
-    def check_out_of_bounds(self, position):
+    def check_out_of_bounds(self, position) -> bool:
         """
         This function simple checks if the passed position is out of bounds
         """
@@ -38,7 +37,16 @@ class Board:
             return True
         return False
 
-    def generate_tiles(self):
+    def draw(self) -> None:
+        """
+        By iterating through the board array each tile obj can be drawn with its assocaited draw function
+        """
+        for r in self.board:
+            for tile in r:
+                tile.draw()
+
+    
+    def generate_tiles(self) -> None:
         """
         For a board of size k*k each item in the board list is initialised with a tile object
         """
@@ -49,17 +57,7 @@ class Board:
                 tile = Tile(self.interface, x, y, self.cell_size)      
                 self[r, c] = tile 
 
-
-    def draw(self):
-        """
-        By iterating through the board array each tile obj can be drawn with its assocaited draw function
-        """
-        for r in self.board:
-            for tile in r:
-                tile.draw()
-
-    
-    def generate_random_position(self, x_limit = 0, y_limit = 1):
+    def generate_random_position(self, x_limit = 0, y_limit = 1) -> tuple:
         """
         here a secured 'free' random position is generated
         """
