@@ -15,7 +15,7 @@ class Apple:
 
             self.generate()
 
-    def generate(self):
+    def generate(self) -> None:
         """
         Gets a random position from the board and places the apple on the board
         """
