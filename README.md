@@ -1,7 +1,3 @@
----
-cover: .gitbook/assets/kaa.jpeg
-coverY: 0
----
 
 # Snake
 
