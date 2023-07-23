@@ -29,7 +29,6 @@ class Snake:
         self.title_font     = interface.title_font
         self.end_game_text  = interface.end_game_text
 
-        
         #The snake begins in a random direction
         self.new_direction = self.direction = random.choice(("UP", "DOWN", "LEFT", "RIGHT"))
         
@@ -37,7 +36,6 @@ class Snake:
         self.set_move_time = interface.game_speed  # Time in milliseconds for each move (half a second)
         self.last_move_time = 0
         self.current_time = 0
-
 
         self.opposite_direction = {
                         "UP"    : "DOWN",
@@ -59,9 +57,6 @@ class Snake:
         self.body = Body(self, self.board) #the body is a deque 
         self.init_snake_positions() #init the beginning snake on the board
         
-
-
-
 
     def init_snake_positions(self) -> None:
         """
@@ -90,8 +85,7 @@ class Snake:
             case "RIGHT":
                 self.body.appendleft((r, c-1))
                 self.body.appendleft((r, c-2))
-
-              
+        
     def init_images(self) -> None:
         """
         Initialising all images to be used with the snake sprite
@@ -105,8 +99,6 @@ class Snake:
         self.body_image = self.image.create("assets/images/snake_body.png")
         self.tail_image = self.image.create("assets/images/snake_tail.png")
         
-
-
     def handle_event(self, event):
         """
         When the user press a key the direction of the snake is changed
@@ -175,8 +167,7 @@ class Snake:
             case _:
                 return
 
-
-    def move(self):
+    def move(self) -> None:
         """
         This function is where the magic happens:
         
@@ -221,12 +212,7 @@ class Snake:
                 head = None
                 self.direction = self.new_direction
 
-
-                                
-                
-                
-
-    def get_direction(self, position_1 , position_2):
+    def get_direction(self, position_1 , position_2) -> None:
         """
         Given any two positions this function finds the direction in which the first position is going
         e.g.
@@ -236,13 +222,13 @@ class Snake:
         """
         return self.coordinate_direction[self.get_coord_difference(position_1, position_2)]
 
-    def get_coord_difference(self, position_1, position_2):
+    def get_coord_difference(self, position_1, position_2) -> tuple:
         """
         This function returns the difference between two tuples - (r,c)
         """
         return tuple(map(lambda i, j: i - j, position_1, position_2))    
     
-    def get_rotated_image(self, image, direction):
+    def get_rotated_image(self, image, direction) -> pygame.transform:
         """
         This function rotates an image based upon its direction
         It is used only for the head and tail such that is will always be facing the correct direction
@@ -259,7 +245,7 @@ class Snake:
 
         return pygame.transform.rotate(image, angle)
 
-    def get_random_head_image(self):
+    def get_random_head_image(self) -> pygame.image:
         """
         This function attempts to choose a head for the snake so it looks realistic 
         and not just a random choice between multiple heads
@@ -282,7 +268,7 @@ class Snake:
         return self.head_image
             
                     
-    def check_bad_collisions(self, position):
+    def check_bad_collisions(self, position) -> bool:
         """
         This function checks to see if the new position is either 
         already a snake position (self collision) OR a position outside the board (board collision)
@@ -300,13 +286,13 @@ class Snake:
             return True
         return False
     
-    def check_apple_collision(self, position):
+    def check_apple_collision(self, position) -> bool:
         """
         If the given position has the same position as the apple then a collision exists (True)
         """
         return True if position == self.apple.position else False
 
-    def check_winstate(self):
+    def check_winstate(self) -> bool:
         """
         If the snake length is the area of the board (K^2),
         then the user has won
@@ -346,13 +332,13 @@ class Body(deque):
 
 
     @property
-    def head(self):
+    def head(self) -> tuple:
         """Easy access to head of snake using attribute body.head for cleaner notation instead of body[-1]"""
         self._head = self[-1]
         return self._head
     
     @head.setter
-    def head(self, value):
+    def head(self, value) -> None:
         """
         Setting the tail with the given value
         """
@@ -365,7 +351,7 @@ class Body(deque):
         self.board[self.head].value = value
 
     @property
-    def tail(self):
+    def tail(self) -> tuple:
         """
         Easy access to tail of snake using attribute body.tail for cleaner notation instead of body[0]
         """
@@ -373,7 +359,7 @@ class Body(deque):
         return self._tail
 
     @tail.setter
-    def tail(self, value):
+    def tail(self, value) -> None:
         """
         Setting the tail with the given value
         """
@@ -393,21 +379,17 @@ class Body(deque):
             direction = self.get_direction(self.tail, self[1])
             value = self.get_rotated_image(value, direction)
 
-        
         self.board[self.tail].value = value
 
 
-    def set_body(self):
+    def set_body(self) -> None:
         """
         This function sets all positions except head and tail of the deque to the body image
         """
         for i in range(1, len(self)-1):
             self.board[self[i]].value = self.body_image
         
-   
-
-
-    def update(self, head=None):
+    def update(self, head=None) -> None:
         #set the snek on the board
         self.set_body()
         self.tail = self.tail_image
@@ -420,8 +402,7 @@ class Body(deque):
             - Eating
         """
 
-        
-    def generate_tail(self):
+    def generate_tail(self) -> None:
         """
         This function generate a new tail position depending up the current tail direction
         """
