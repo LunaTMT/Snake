@@ -9,7 +9,7 @@ class Rectangle():
         return  rect.width, rect.height
     
     @classmethod
-    def draw_text_in_center(cls, screen, font, text, rect, colour):
+    def draw_text_in_center(cls, screen, font, text, rect, colour) -> None:
         """
         This function takes a rectangle and draws the provided text in the rectangles center
         """
