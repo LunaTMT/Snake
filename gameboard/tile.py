@@ -21,7 +21,7 @@ class Tile(pygame.sprite.Sprite):
 
         self.interface.tiles.append(self)
 
-    def draw(self):
+    def draw(self) -> None:
         """
         Simply blits on the screen the current image value of the tile for its associated rectangle
         """
