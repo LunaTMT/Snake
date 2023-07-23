@@ -16,9 +16,7 @@ from other.screen import Screen
 from other.sound import Sound
 from other.image import Image
 
-
 class Game:
-
     def __init__(self, k):
         self.is_running = False
         self.start_time = None
@@ -31,7 +29,6 @@ class Game:
         self.sound = Sound()
         self.image = Image(self)
         
-
     def init(self):
         pygame.init()
 
@@ -49,26 +46,19 @@ class Game:
         self.snake      = Snake(self)
         self.scoreboard = Scoreboard(self)
 
-        
-
-
     def run(self):
         self.init() 
-
         while self.running:
             self.handle_events()
             self.update()
             self.draw()
         self.cleanup()
 
-
     def handle_events(self):
         for event in pygame.event.get():
-            self.check_if_quit(event)
-            
+            self.check_if_quit(event)           
             if GameState.play_game:
-                self.snake.handle_event(event) 
-            
+                self.snake.handle_event(event)            
             if GameState.end_game:
                 self.check_any_key(event)
         
@@ -81,12 +71,11 @@ class Game:
         if event.type == KEYDOWN:
             GameState.reset_states()
             self.init()
-
-
+            
     def update(self):
         if GameState.play_game:
             self.snake.move() 
-
+            
     def draw(self):
         self.board.draw()
         self.scoreboard.draw()
@@ -95,15 +84,11 @@ class Game:
             if self.is_timer_finished():
                 self.draw_title(self.title_font, self.end_game_text, self.end_game_colour  , x=1 ,y=0.5)
                 self.draw_title(self.title_font, "      Press any \n key to continue", colours.WHITE)
-        
         pygame.display.flip()
 
     def cleanup(self):
         print("Quitting")
         pygame.quit()
-
-
-
 
     def draw_title(self, font, text, colour, x=1, y=1) -> None:
         """
@@ -121,16 +106,14 @@ class Game:
         center_x = (self.screen.width - width) // 2
         center_y = (self.screen.height - height) // 2
         return center_x * x_tranpose, center_y * y_transpose
-    
-    
-    def start_timer(self):
+
+    def start_timer(self) -> None:
         """
         Function to start the timer
         """
         self.start_time = pygame.time.get_ticks()
 
-    
-    def is_timer_finished(self):
+    def is_timer_finished(self) -> bool:
         """
         This funciton checks if the timer has elapsed
 
@@ -148,5 +131,4 @@ class Game:
 
         current_time = pygame.time.get_ticks()
         elapsed_time = current_time - self.start_time
-
         return elapsed_time >= 1000
