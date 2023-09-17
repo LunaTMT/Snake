@@ -1,5 +1,3 @@
-
-
 # Snake
 
 ## Demonstration
@@ -85,6 +83,6 @@ I would've quite liked to have implemented animations for the snake body such as
 
 The following projects I am going to attempt to develop are:
 
-* Minesweeper
-* 2048
-* Doodle Jump
+* ~~Minesweeper~~
+* ~~2048~~
+* ~~Doodle Jump~~
